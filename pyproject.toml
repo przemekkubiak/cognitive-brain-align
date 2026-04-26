@@ -1,0 +1,79 @@
+[build-system]
+requires = ["setuptools>=65.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cogbench-eval"
+version = "0.1.0"
+description = "CogBench model evaluation suite for cognitive benchmark studies"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [{name = "Przemyslaw Kubiak"}]
+requires-python = ">=3.8"
+dependencies = [
+    "torch>=2.0.0",
+    "transformers>=4.30.0",
+    "huggingface_hub>=0.16.0",
+    "safetensors>=0.3.0",
+    "numpy>=1.24.0",
+    "scipy>=1.10.0",
+    "pandas>=1.5.0",
+    "pyyaml>=6.0",
+    "tqdm>=4.65.0",
+]
+
+[project.optional-dependencies]
+viz = [
+    "matplotlib>=3.7.0",
+    "seaborn>=0.12.0",
+]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "black>=22.0.0",
+    "isort>=5.11.0",
+    "flake8>=4.0.0",
+    "mypy>=0.990",
+]
+
+[project.scripts]
+cogbench-eval = "cogbench_eval.cli:main"
+
+[tool.setuptools]
+packages = ["cogbench_eval"]
+
+[tool.setuptools.package-dir]
+"" = "src"
+
+[tool.black]
+line-length = 88
+target-version = ['py38', 'py39', 'py310', 'py311']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.git
+  | \.venv
+  | venv
+  | build
+  | dist
+)/
+'''
+
+[tool.isort]
+profile = "black"
+line_length = 88
+skip_gitignore = true
+known_first_party = ["cogbench_eval"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py", "*_test.py"]
+addopts = "--cov=src/cogbench_eval --cov-report=html --cov-report=term-missing"
+
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false
+ignore_missing_imports = true

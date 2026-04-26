@@ -1,0 +1,82 @@
+# Pythia Model Scaling Suite Configuration
+
+models:
+  pythia:
+    variants:
+      - name: "70m"
+        hf_id: "EleutherAI/pythia-70m"
+        params: 70000000
+        resources:
+          gpu: 1
+          memory_gb: 24
+          time_hours: 2
+      
+      - name: "160m"
+        hf_id: "EleutherAI/pythia-160m"
+        params: 160000000
+        resources:
+          gpu: 1
+          memory_gb: 24
+          time_hours: 2
+      
+      - name: "410m"
+        hf_id: "EleutherAI/pythia-410m"
+        params: 410000000
+        resources:
+          gpu: 1
+          memory_gb: 32
+          time_hours: 3
+      
+      - name: "1b"
+        hf_id: "EleutherAI/pythia-1b"
+        params: 1000000000
+        resources:
+          gpu: 1
+          memory_gb: 40
+          time_hours: 4
+      
+      - name: "1.4b"
+        hf_id: "EleutherAI/pythia-1.4b"
+        params: 1400000000
+        resources:
+          gpu: 1
+          memory_gb: 40
+          time_hours: 4
+      
+      - name: "2.8b"
+        hf_id: "EleutherAI/pythia-2.8b"
+        params: 2800000000
+        resources:
+          gpu: 1
+          memory_gb: 48
+          time_hours: 6
+      
+      - name: "6.9b"
+        hf_id: "EleutherAI/pythia-6.9b"
+        params: 6900000000
+        resources:
+          gpu: 1
+          memory_gb: 64
+          time_hours: 8
+      
+      - name: "12b"
+        hf_id: "EleutherAI/pythia-12b"
+        params: 12000000000
+        resources:
+          gpu: 2
+          memory_gb: 80
+          time_hours: 12
+
+# CogBench settings
+cogbench:
+  repository: "https://github.com/juliancodaforno/CogBench.git"
+  reference_models:
+    - "gpt-4"
+    - "claude-2"
+
+# Output settings
+output:
+  results_dir: "cogbench_results"
+  logs_dir: "logs"
+  analysis_dir: "analysis_output"
+  plots_dir: "plots"
